@@ -1,0 +1,29 @@
+{
+    "name": "koa-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "node ./build/build-dev.js",
+        "babel-run": "node ./build/babel-serve.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "koa": "^2.3.0",
+        "koa-better-body": "^3.0.4",
+        "koa-better-router": "^2.1.1",
+        "mysql": "^2.14.1",
+        "webpack": "^3.5.5"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-stage-3": "^6.24.1",
+        "clean-webpack-plugin": "^0.1.16",
+        "version": "^0.1.2"
+    }
+}
