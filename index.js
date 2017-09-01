@@ -1,14 +1,16 @@
 import Koa from 'koa'
 import dbOp from './config/db.query.js';
-
+import path from 'path'
 import body from 'koa-better-body'
 import Router from 'koa-better-router'
+import staticMiddleware from 'koa-static';
 import wetherRouter from './routes/wether.js'
 import wetherCityRouter from './routes/wether_city.js'
 
 
 import https from 'https'
 const app = new Koa();
+
 app.use(body());
 // const router = Router().loadMethods();
 
@@ -52,33 +54,36 @@ app.use(async(ctx, next) => {
 
 app.use(async(ctx, next) => {
     const start = Date.now();
-
-    console.log("1");
     await next();
-
-    console.log("4");
-
     const ms = Date.now() - start;
     console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 
 });
+
+app.use(staticMiddleware(path.resolve(__dirname, './static')))
 app.use(wetherRouter.middleware());
 app.use(wetherCityRouter.middleware());
-app.use(async ctx => {
-    if (ctx.status == 404) {
+app.use(async(ctx, next) => {
+    console.log('ctx.status = ', ctx.status);
+    ctx.body = JSON.stringify({
+        success: true,
+        data: ctx.state.re
 
-        console.log("3");
+    });
+
+    // if (ctx.status == 404) {
+
+    //     console.log("3");
 
 
-        ctx.body = JSON.stringify({
-            success: false,
-            data: []
+    //     ctx.body = JSON.stringify({
+    //         success: false,
+    //         data: []
 
-        });
-    }
+    //     });
+    // }
 
 })
-
 
 
 app.listen(3000, () => {

@@ -2,7 +2,7 @@ import Router from 'koa-better-router'
 import dbOp from '../config/db.query.js'
 
 
-var wetherRoute = Router().loadMethods();
+var wetherRoute = Router({ prefix: '/api' }).loadMethods();
 
 wetherRoute.get('/wether/get/:id', async(ctx, next) => {
     console.log("2");
@@ -14,7 +14,7 @@ wetherRoute.get('/wether/get/:id', async(ctx, next) => {
     var res = await dbOp.db.dbquery('SELECT * FROM cds WHERE id=?', id);
     // console.log(res);
     if (res.length == 0) {
-        ctx.status = 404;
+        // ctx.status = 404;
 
     }
 
@@ -30,7 +30,7 @@ wetherRoute.post('/wether/post', async(ctx, next) => {
     // console.log(ctx.request.fields)
     var res;
     try {
-        res = dbOp.db.dbquery("INSERT INTO cds set ?", ctx.request.fields);
+        res = dbOp.db.dbquery("INSERT INTO tp_china_city set ?", ctx.request.fields);
         console.log(res);
 
     } catch (err) {

@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const mconfig = require('./mysql.config.js')
 
 
-var pool = mysql.createPool(mconfig);
+var pool = mysql.createPool(mconfig.mysqlConfig);
 
 // exports.dbquery = (sql, val) => {
 //     return new Promise((reslove, reject) => {
